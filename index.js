@@ -1,6 +1,6 @@
 const playlistName = "RadioKiwi";
 const playlistImage = `https://i.scdn.co/image/ab67706c0000bebb3047f84814f9be072ebb3c7e`
-const playlist = ['LONDRA.mp3', 'USCITO DI GALERA.mp3']
+const playlist = ['LONDRA.mp3', 'USCITO DI GALERA.mp3', '04 Coltellata (acustica).mp3']
 
 /*
 *
