@@ -1,0 +1,201 @@
+body {
+    padding: 0;
+    user-select: none;
+}
+
+#playlistCoverContainer {
+    position: relative;
+    width: calc(100% - 4em);
+    padding: 2em;
+    display: flex;
+    align-items: center;
+}
+#playlistCoverContainer > #backgroundPlaylistCover {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    opacity: 0.5;
+}
+
+#playlistCover {
+    width: 10em;
+}
+
+#playlistTitle {
+    margin: 1em;
+    font-weight: 700;
+    font-size: 2em;
+    text-shadow: black 0 0 20px;
+}
+
+/*  */
+
+#songList {
+    margin: auto;
+    padding-bottom: 60px;
+    width: 75%;
+    margin-top: 1em;
+}
+#songList > div {
+    position: relative;
+    border-radius: var(--radius-medium);
+    margin: 0.5em;
+    flex-wrap: nowrap;
+    height: 4em;
+}
+#songList > div > .img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: var(--radius-small);
+}
+#songList > div > div.flex {
+    padding: 1em;
+    text-align: left;
+    margin-left: 5em;
+}
+#songList .songTitle {
+    font-size: 1.25em;
+}
+#songList .songAuthor {
+    font-size: 0.75em;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 860px) {
+    #songList {        
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        text-align: center;
+        width: 100%;
+        margin-top: 0em;
+    }
+    #playlistCoverContainer {        
+        justify-content: center;
+    }
+}
+
+/* Player */
+
+.player {
+    border: solid 1px var(--inverted-soft);
+    color: var(--inverted);
+    padding-left: 1em;
+    width: 75%;
+    background-color: var(--color-2);
+    transition: 0.25s;
+}
+.player.hidden {
+    bottom: -55px;
+}
+
+.player .flex {
+    flex-wrap: nowrap;
+}
+
+.player > .flex {
+    height: 48px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/*  */
+.player #playerImg {    
+    width: 2em;
+}
+.player .flex#playerInfo {
+    font-size: 0.9em;
+    padding-left: 1em;
+    text-align: left;
+}
+
+.player .songTitle {
+    font-size: 1.25em;
+}
+.player .songAuthor {
+    font-size: 0.75em;
+    opacity: 0.5;
+}
+
+    /* buttons */
+.player .playpause {
+    cursor: pointer;
+    height: 1em;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0.5em 0px 0.5em 1em;
+    border-color: transparent transparent transparent currentColor;
+    transition: all 100ms ease-in-out;
+}
+.player .playpause.paused {
+    border-style: double;
+    border-width: 0px 0px 0px 1em;
+}
+
+.player #download {
+    width: 2em; 
+    height: 2em; 
+    fill: currentColor;
+    color: currentColor;
+}
+
+/* html5 audio player */
+
+.player audio {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 4px;
+}
+.player::after {
+    content: '';
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--color-2);
+    top: -1em;
+    right: -0.5em;
+    z-index: 1000;
+}
+
+audio::-webkit-media-controls-enclosure {
+    filter: invert(0);
+    background-color: transparent;
+}
+@media (prefers-color-scheme: dark) {    
+    audio::-webkit-media-controls-enclosure {
+        filter: invert(0.9) ;
+    }
+}
+
+audio::-webkit-media-controls-timeline {
+    pointer-events: visible;
+}
+
+audio::-webkit-media-controls-play-button {
+    display: none !important;
+}
+audio::-webkit-media-controls-current-time-display{
+    display: none !important;
+}
+audio::-webkit-media-controls-time-remaining-display{
+    display: none !important;    
+}
+audio::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+audio::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+audio::-webkit-media-controls-volume-control-container.closed {
+    display: none !important;
+}
+audio::-webkit-media-controls-volume-control-container {
+    display: none !important;
+}
