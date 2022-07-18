@@ -1,20 +1,6 @@
 body {
     padding: 0;
     user-select: none;
-    background-color: var(--color-1);
-    transition: 0.25s;
-}
-
-#loading {
-    margin: auto; 
-    width: 50%; 
-    background-size: contain; 
-    background-image: url(./loading.gif);
-    transition: 0.25s;
-    opacity: 1;
-}
-#loading.hidden {
-    opacity: 0;
 }
 
 #playlistCoverContainer {
@@ -53,12 +39,7 @@ body {
     padding-bottom: 60px;
     width: 75%;
     margin-top: 1em;
-    opacity: 1;
-    transition: 0.25s;
     justify-content: center;
-}
-#songList.hidden {
-    opacity: 0;
 }
 #songList > div {
     position: relative;

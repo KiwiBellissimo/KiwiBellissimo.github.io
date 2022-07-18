@@ -11,11 +11,8 @@ const playlist = ['04 Coltellata (acustica).mp3', 'Blanco-Sfera-Ebbasta-Mi-fai-i
 *
 */
 
-document.body.style.backgroundColor = '#1c273a';
-
 const backgroundCover = document.getElementById('backgroundPlaylistCover');
 const playlistCover = document.getElementById('playlistCover');
-const loadingImg = document.getElementById('loading');
 
 const playlistTitle = document.getElementById('playlistTitle');
 const songList = document.getElementById('songList');
@@ -78,15 +75,6 @@ playlist.forEach(song => {
         }
     });
 });
-// on for lop end
-setTimeout(() => {    
-    loadingImg.classList.add('hidden');
-    setTimeout(() => {
-        loadingImg.style.display = 'none';
-        document.body.style.backgroundColor = '';
-        songList.style.opacity = 1;
-    }, 250);
-}, 1000);
 
 // blurred bg manager
 function changeBg(newImage) {
