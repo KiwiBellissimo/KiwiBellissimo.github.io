@@ -18,10 +18,15 @@ const playlistTitle = document.getElementById('playlistTitle');
 const songList = document.getElementById('songList');
 
 const playerContainer = document.getElementById('playerContainer');
+const player = document.getElementById('player');
+
 const playpause = document.getElementById('playpause');
 const playerDownload = document.getElementById('download');
 const volumeSlider = document.getElementById('volumeSlider');
-const player = document.getElementById('player');
+const volumeSliderSmallWave = document.getElementById('volumeSmallWave');
+const volumeSliderBigWave = document.getElementById('volumeBigWave');
+const volumeSliderMuteBar = document.getElementById('volumeMuteBar');
+
 const playerImage = document.getElementById('playerImg');
 const playerSongTitle = document.getElementById('playerSongTitle');
 const playerSongArtist = document.getElementById('playerSongArtist');
@@ -96,6 +101,34 @@ function play(title) {
 // volume slider
 volumeSlider.addEventListener('input', () => {
     player.volume = volumeSlider.value / 100
+    if (volumeSlider.value == 100) {
+        volumeSliderBigWave.style.display = 'block';
+        volumeSliderSmallWave.style.display = 'block';
+        volumeSliderSmallWave.style.transform = 'scale(1)';
+        volumeSliderMuteBar.style.display = 'none'
+    }
+    else if (volumeSlider.value > 50) {
+        volumeSliderBigWave.style.display = 'none';
+        volumeSliderSmallWave.style.display = 'block';
+        volumeSliderSmallWave.style.transform = 'scale(1)';
+        volumeSliderMuteBar.style.display = 'none'
+    }
+    else if (volumeSlider.value > 25) {
+        volumeSliderBigWave.style.display = 'none';
+        volumeSliderSmallWave.style.display = 'block';
+        volumeSliderSmallWave.style.transform = 'scale(0.75) translate(25%, 20%)';
+        volumeSliderMuteBar.style.display = 'none'
+    }
+    else {
+        volumeSliderBigWave.style.display = 'none';
+        volumeSliderSmallWave.style.display = 'block';
+        volumeSliderMuteBar.style.display = 'none'
+
+        if (volumeSlider.value == 0) {
+            volumeSliderSmallWave.style.display = 'none';
+            volumeSliderMuteBar.style.display = 'block'
+        }
+    }
 })
 
 // playpause button
