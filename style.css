@@ -2,7 +2,7 @@ body {
     padding: 0;
     user-select: none;
     background-color: var(--color-1);
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 #loading {
