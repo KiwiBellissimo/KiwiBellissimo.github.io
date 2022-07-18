@@ -82,6 +82,15 @@ function play(title) {
     playerSongArtist.innerHTML = songs[title].author
     playerImage.style.backgroundImage = `url("${songs[title].picture}")`
     player.autoplay = true
+
+    // autoplay next song
+    let currentIndex = Object.keys(songs).indexOf(title)
+    let nextSong = Object.keys(songs)[ (currentIndex + 1) % Object.keys(songs).length ]
+    player.addEventListener('ended', () => {
+        setTimeout(() => {            
+            play(nextSong)
+        }, 1000);
+    })
 }
 
 // volume slider
