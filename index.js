@@ -11,19 +11,20 @@ const playlist = ['LONDRA.mp3', 'USCITO DI GALERA.mp3', '04 Coltellata (acustica
 *
 */
 
-const backgroundCover = document.getElementById('backgroundPlaylistCover')
-const playlistCover = document.getElementById('playlistCover')
+const backgroundCover = document.getElementById('backgroundPlaylistCover');
+const playlistCover = document.getElementById('playlistCover');
 
-const playlistTitle = document.getElementById('playlistTitle')
-const songList = document.getElementById('songList')
+const playlistTitle = document.getElementById('playlistTitle');
+const songList = document.getElementById('songList');
 
-const playerContainer = document.getElementById('playerContainer')
-const playpause = document.getElementById('playpause')
-const playerDownload = document.getElementById('download')
-const player = document.getElementById('player')
-const playerImage = document.getElementById('playerImg')
-const playerSongTitle = document.getElementById('playerSongTitle')
-const playerSongArtist = document.getElementById('playerSongArtist')
+const playerContainer = document.getElementById('playerContainer');
+const playpause = document.getElementById('playpause');
+const playerDownload = document.getElementById('download');
+const volumeSlider = document.getElementById('volumeSlider');
+const player = document.getElementById('player');
+const playerImage = document.getElementById('playerImg');
+const playerSongTitle = document.getElementById('playerSongTitle');
+const playerSongArtist = document.getElementById('playerSongArtist');
 
 var songs = {}
 
@@ -83,6 +84,11 @@ function play(title) {
     player.autoplay = true
 }
 
+// volume slider
+volumeSlider.addEventListener('input', () => {
+    player.volume = volumeSlider.value / 100
+})
+
 // playpause button
 playpause.addEventListener('click', () => {
     playpause.classList.toggle('paused')
@@ -91,6 +97,7 @@ playpause.addEventListener('click', () => {
     else
         player.pause()
 })
+//player.volume = 0.5
 
 function checkPlaying() {
     if (player.paused)
@@ -102,5 +109,4 @@ function checkPlaying() {
         checkPlaying()
     }, 250);
 }
-
 checkPlaying()
