@@ -119,10 +119,12 @@ body {
 
 .player .songTitle {
     font-size: 1.25em;
+    white-space: nowrap;
 }
 .player .songAuthor {
     font-size: 0.75em;
     opacity: 0.5;
+    white-space: nowrap;
 }
 @media screen and (max-width: 422px) {
     .player .songTitle {
