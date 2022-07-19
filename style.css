@@ -120,20 +120,35 @@ body {
 .player {
     border: solid 1px var(--inverted-soft);
     color: var(--inverted);
-    backdrop-filter: blur(10px) brightness(0.5);
     fill-opacity: 0.5;
     padding-left: 1em;
     padding-right: 0.5em;
     width: 75%;
     transition: 0.25s;
     box-shadow: #00000088 0 0 10px;
-    overflow: visible;
+    overflow: hidden;
     fill-opacity: 1;
 }
 @media (prefers-color-scheme: light) {
     .player {
         background-color: #ffffff88;
     }
+}
+.player::before {
+    z-index: -2;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    backdrop-filter: blur(10px);
+}
+.player::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-1);
+    opacity: 0.5;
 }
 .player.hidden {
     bottom: -75px;
@@ -179,17 +194,21 @@ body {
 }
 
 .player .volume {
+    position: relative;
     margin-left: 1em;
     padding: 0.1em;
     padding-inline: 0.25em;
-    background-color: #00000044;
     border-radius: var(--radius-medium);
+    overflow: hidden;
     transition: 0.25s;
 }
-@media (prefers-color-scheme: light) {
-    .player .volume {
-        background-color: #ffffff44;
-    }
+.volume::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-2);
+    opacity: 0.5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -235,16 +254,23 @@ body {
 
 /* player progress */
 #playerProgress {
-    position: absolute;
-    width: 85%;
-    top: px;
+    z-index: 10;
+    position: fixed;
+    width: 70%;
+    bottom: 48.5px;
+    top: unset;
+    transition: 0.25s;
 }
 @media (prefers-color-scheme: dark) {
     #playerProgress {
-        top: -1px;
         filter: invert(1);
     }
 }
+
+.player.hidden ~ #playerProgress {
+    bottom: -10px;
+}
+
 #playerProgress::-webkit-slider-runnable-track {
     height: 5px;
 }
