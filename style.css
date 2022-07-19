@@ -72,6 +72,7 @@ body {
     width: 75%;
     margin-top: 1em;
     justify-content: center;
+    overflow: hidden;
 }
 #songList > div {
     position: relative;

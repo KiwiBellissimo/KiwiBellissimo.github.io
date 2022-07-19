@@ -188,7 +188,6 @@ volumeSlider.addEventListener('input', () => {
 player.addEventListener('timeupdate', function() {
     playerProgress.max = player.duration;
     playerProgress.value = player.currentTime;
-    console.log(player.currentTime);
 })
 playerProgress.addEventListener('input', function() {
     player.currentTime = playerProgress.value;
