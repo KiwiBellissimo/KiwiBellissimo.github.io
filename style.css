@@ -127,7 +127,7 @@ body {
     width: 75%;
     transition: 0.25s;
     box-shadow: #00000088 0 0 10px;
-    overflow: visible;
+    overflow-y: visible;
     fill-opacity: 1;
 }
 @media (prefers-color-scheme: light) {
