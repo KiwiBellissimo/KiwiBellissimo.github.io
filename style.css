@@ -258,7 +258,7 @@ body {
     z-index: 10;
     position: fixed;
     width: 70%;
-    bottom: 48.5px;
+    bottom: 49px;
     top: unset;
     transition: 0.25s;
 }
