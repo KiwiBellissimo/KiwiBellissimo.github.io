@@ -10,6 +10,8 @@ const playlist = ['04 Coltellata (acustica).mp3', 'Blanco-Sfera-Ebbasta-Mi-fai-i
 *
 *
 */
+const loadingWrapper = document.getElementById('loadingWrapper')
+const loadingWrapperSlider = document.getElementById('loadingWrapperSlider')
 
 const backgroundCover = document.getElementById('backgroundPlaylistCover');
 const playlistCover = document.getElementById('playlistCover');
@@ -20,6 +22,7 @@ const songList = document.getElementById('songList');
 const playerContainer = document.getElementById('playerContainer');
 const player = document.getElementById('player');
 
+const playerProgress = document.getElementById('playerProgress');
 const playpause = document.getElementById('playpause');
 const playerDownload = document.getElementById('download');
 const volumeSlider = document.getElementById('volumeSlider');
@@ -39,8 +42,10 @@ backgroundCover.style.backgroundImage = playlistCover.style.backgroundImage
 playlistTitle.innerText = playlistName
 document.title = playlistName
 
-playlist.forEach(song => {
-    let songPath = `${window.location.origin}/music/${song}`
+let processedElements = 0
+for (let index = 0; index < playlist.length; index++) {
+    const songFileName = playlist[index];
+    let songPath = `${window.location.origin}/music/${songFileName}`
 
     jsmediatags.read(songPath, {
         onSuccess: function(tag) {
@@ -54,7 +59,7 @@ playlist.forEach(song => {
             // fetch data into an object
             let source = {}
             source[tag.tags.title] = {
-                songPath: `./music/${song}`,
+                songPath: `./music/${songFileName}`,
                 author: tag.tags.artist,
                 picture: picture
             }
@@ -70,12 +75,41 @@ playlist.forEach(song => {
                     </div>
                 </div>
             `
+            processedElements += 1
+            updateLoading( Math.trunc((processedElements * 100) / playlist.length))
+            if (processedElements == playlist.length)
+                postLoopActions()
         },
         onError: function(error) {
             console.log(error);
+            processedElements += 1
+            if (processedElements == playlist.length)
+                postLoopActions()
         }
     });
-});
+}
+
+function updateLoading(percentage) {
+    loadingWrapperSlider.style = `width: ${percentage}%;`;
+
+    
+    if (percentage == 100) {
+        setTimeout(() => {
+            loadingWrapper.classList.add('hidden');
+            setTimeout(() => {
+                loadingWrapper.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 250);
+        }, 750);
+    }
+}
+function postLoopActions() {
+    // add spotify iframe
+    songList.innerHTML += `
+        <iframe style="border-radius: var(--radius-small); margin-top: 2em;" src="https://open.spotify.com/embed/playlist/530hy5uPm0yuFBMIPonWzR?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    `
+}
+
 
 // blurred bg manager
 function changeBg(newImage) {
@@ -150,6 +184,16 @@ volumeSlider.addEventListener('input', () => {
     }
 })
 
+// player progress bar manager
+player.addEventListener('timeupdate', function() {
+    playerProgress.max = player.duration;
+    playerProgress.value = player.currentTime;
+    console.log(player.currentTime);
+})
+playerProgress.addEventListener('input', function() {
+    player.currentTime = playerProgress.value;
+})
+
 // playpause button
 playpause.addEventListener('click', () => {
     playpause.classList.toggle('paused')
@@ -158,7 +202,6 @@ playpause.addEventListener('click', () => {
     else
         player.pause()
 })
-//player.volume = 0.5
 
 function checkPlaying() {
     if (player.paused)
