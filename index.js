@@ -32,6 +32,7 @@ const playerSongTitle = document.getElementById('playerSongTitle');
 const playerSongArtist = document.getElementById('playerSongArtist');
 
 var songs = {}
+var currentIndex
 
 playlistCover.style.backgroundImage = `url(${playlistImage})`
 backgroundCover.style.backgroundImage = playlistCover.style.backgroundImage
@@ -90,6 +91,12 @@ function changeBg(newImage) {
 }
 
 // audio management
+player.addEventListener('ended', function() {
+    setTimeout(() => {            
+        playNextSong();
+    }, 1000);
+})
+
 function play(title) {
     playerContainer.classList.remove('hidden')
 
@@ -103,14 +110,11 @@ function play(title) {
     playerImage.style.backgroundImage = `url("${songs[title].picture}")`
     player.autoplay = true
 
-    // autoplay next song
-    let currentIndex = Object.keys(songs).indexOf(title)
+    currentIndex = Object.keys(songs).indexOf(title)
+}
+function playNextSong() {
     let nextSong = Object.keys(songs)[ (currentIndex + 1) % Object.keys(songs).length ]
-    player.addEventListener('ended', () => {
-        setTimeout(() => {            
-            play(nextSong)
-        }, 1000);
-    })
+    play(nextSong)
 }
 
 // volume slider
