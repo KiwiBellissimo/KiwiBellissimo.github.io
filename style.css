@@ -4,6 +4,43 @@ body {
     overflow: hidden;
 }
 
+/**/
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.absolute-center.bottom {
+    position: fixed;
+    transform: translate(-50%, 0);
+    top: unset;
+    bottom: 0;
+}
+
+/**/
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.flex.column {
+    flex-direction: column;
+}
+.flex.row {
+    align-items: center;
+}
+
+/**/
+.img {
+    background-size: cover;
+}
+.img.square {
+    aspect-ratio: 1/1;
+    border-radius: 1em;
+}
+
+
 /* loadingWrapper */
 #loadingWrapper {
     position: fixed;
@@ -79,7 +116,8 @@ body {
     border-radius: var(--radius-medium);
     margin: 0.5em;
     flex-wrap: nowrap;
-    height: 4em;
+    background: var(--color-2);
+    cursor: pointer;
 }
 #songList > div > .img {
     position: absolute;
@@ -119,7 +157,7 @@ body {
 /* Player */
 
 .player {
-    border: solid 1px var(--inverted-soft);
+    border: solid 2px var(--inverted-soft);
     color: var(--inverted);
     fill-opacity: 0.5;
     padding-left: 1em;
@@ -258,7 +296,7 @@ body {
     z-index: 10;
     position: fixed;
     width: 70%;
-    bottom: 49px;
+    bottom: 50px;
     top: unset;
     transition: 0.25s;
 }
